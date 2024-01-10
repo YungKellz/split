@@ -15,13 +15,26 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "eslint-plugin-prettier": "4.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "setup": "yarn install  && node -e \"require('fs').copyFile('.env.example', '.env', function(err) { if (err) console.log(err); console.log('Setup is complete!') })\"",
+    "start-public": "webpack-dev-server --config ./config/webpack.config.js --host 0.0.0.0 --useLocalIp",
+    "recursiveDepsAnalyze": "set DETECT_LOOPS=true && webpack --config config/webpack5.config.js --profile",
+    "bundleAnalyze": "set USE_ANALYZER=true && webpack --config config/webpack5.config.js --profile",
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
+    "lint:ci": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "tsc:ci": "tsc --noEmit",
+    "tslint": "yarn lint && tsc --noEmit",
+    "bump": "npm version patch -m '%s' && git push && git push --tags",
+    "assembly:release": "webpack --config  --env.GENERATE_SOURCEMAP=true ",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook  --quiet"
   },
   "eslintConfig": {
     "extends": [
@@ -40,5 +53,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-flowtype": "8.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "@typescript-eslint/eslint-plugin": "5.57.0",
+    "@typescript-eslint/parser": "5.57.0",
+    "prettier": "3.1.1"
   }
 }
